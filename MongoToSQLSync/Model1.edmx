@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RulesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="OfficeTypeMaster">
+          <Key>
+            <PropertyRef Name="officeTypeID" />
+          </Key>
+          <Property Name="officeTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="officename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="15" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Fk_OfficeCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="SAL_SalaryType_Mst">
+          <Key>
+            <PropertyRef Name="pk_saltypeid" />
+          </Key>
+          <Property Name="pk_saltypeid" Type="smallint" Nullable="false" />
+          <Property Name="saltype" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="orderby" Type="smallint" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RulesModelStoreContainer">
+          <EntitySet Name="OfficeTypeMaster" EntityType="Self.OfficeTypeMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAL_SalaryType_Mst" EntityType="Self.SAL_SalaryType_Mst" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RulesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="SAL_SalaryType_Mst">
+          <Key>
+            <PropertyRef Name="pk_saltypeid" />
+          </Key>
+          <Property Name="pk_saltypeid" Type="Int16" Nullable="false" />
+          <Property Name="saltype" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="orderby" Type="Int16" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="RulesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SAL_SalaryType_Mst" EntityType="Self.SAL_SalaryType_Mst" />
+          <EntitySet Name="OfficeTypeMasters" EntityType="RulesModel.OfficeTypeMaster" />
+        </EntityContainer>
+        <EntityType Name="OfficeTypeMaster">
+          <Key>
+            <PropertyRef Name="officeTypeID" />
+          </Key>
+          <Property Name="officeTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="officename" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="code" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Fk_OfficeCategoryId" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RulesModelStoreContainer" CdmEntityContainer="RulesEntities">
+          <EntitySetMapping Name="SAL_SalaryType_Mst">
+            <EntityTypeMapping TypeName="RulesModel.SAL_SalaryType_Mst">
+              <MappingFragment StoreEntitySet="SAL_SalaryType_Mst">
+                <ScalarProperty Name="pk_saltypeid" ColumnName="pk_saltypeid" />
+                <ScalarProperty Name="saltype" ColumnName="saltype" />
+                <ScalarProperty Name="orderby" ColumnName="orderby" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OfficeTypeMasters">
+            <EntityTypeMapping TypeName="RulesModel.OfficeTypeMaster">
+              <MappingFragment StoreEntitySet="OfficeTypeMaster">
+                <ScalarProperty Name="Fk_OfficeCategoryId" ColumnName="Fk_OfficeCategoryId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="officename" ColumnName="officename" />
+                <ScalarProperty Name="officeTypeID" ColumnName="officeTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
